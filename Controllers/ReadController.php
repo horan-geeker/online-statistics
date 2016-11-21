@@ -15,7 +15,9 @@ class ReadController extends Controller
 
     public function __construct()
     {
-
+        if(!$_GET['id']){
+            die('非法访问');
+        }
     }
 
     public function show()

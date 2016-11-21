@@ -20,7 +20,6 @@ require DIR . "/autoload.php";
 
 spl_autoload_register("Loader::autoload");
 
-
 if (strpos($_SERVER['REQUEST_URI'], 'download') !== false) {
     return (new \Controllers\DownloadController())->index();
 }
