@@ -39,6 +39,7 @@
 <script>
     video = $("#player").get(0);
     time = $("#time");
+
     function changeStatus() {
         if(video.paused){
             video.play();
@@ -51,6 +52,15 @@
 
     function getTime() {
         time.text(parseInt(time.text())+1);
+    }
+
+    window.onbeforeunload = function(){
+        $.ajax({
+            url: '/read?id=<?php echo $video->id;?>&time='+time.text(),
+            type: 'GET',
+            async: false,//这里要同步，否则关闭浏览器的时候fiexfox可能无法正常发送请求
+        });
+        return false;
     }
 
 </script>

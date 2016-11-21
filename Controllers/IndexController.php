@@ -9,11 +9,12 @@ namespace Controllers;
 
 use Models\File;
 
-class IndexController{
+class IndexController
+{
 
-    public function __construct()
+    public function index()
     {
         $files = File::all();
-        return \Views\View::view('show',['files'=>$files]);
+        return \Views\View::view('show', ['files' => $files]);
     }
 }

@@ -22,15 +22,15 @@ spl_autoload_register("Loader::autoload");
 
 
 if(strpos($_SERVER['REQUEST_URI'],'download') !== false){
-    return new \Controllers\DownloadController();
+    return (new \Controllers\DownloadController())->index();
 }
 
 if(strpos($_SERVER['REQUEST_URI'],'read') !== false){
-    return new \Controllers\ReadController();
+    return (new \Controllers\ReadController())->index();
 }
 
 if(strpos($_SERVER['REQUEST_URI'],'video') !== false){
-    return new \Controllers\VideoController();
+    return (new \Controllers\VideoController())->index();
 }
 
-return new \Controllers\IndexController();
+return (new \Controllers\IndexController())->index();

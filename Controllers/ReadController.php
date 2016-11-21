@@ -7,10 +7,30 @@
  */
 namespace Controllers;
 
-class ReadController{
+use Models\File;
+
+class ReadController extends Controller
+{
 
     public function __construct()
     {
+        if(isset($_GET['time'])){
+            $this->inc();
+        }
+    }
 
+    public function index()
+    {
+
+    }
+
+    public function inc()
+    {
+        if (isset($_GET['time'], $_GET['id'])) {
+            $file = File::find($_GET['id']);
+            $file->inc('read_time', $_GET['time']);
+            return true;
+        }
+        return false;
     }
 }

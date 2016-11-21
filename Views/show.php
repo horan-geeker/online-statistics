@@ -14,7 +14,9 @@
         <tr>
             <td>#</td>
             <td>文件</td>
-            <td>平均阅读&观看时间（秒/人）</td>
+            <td>类型</td>
+            <td>阅读&观看次数</td>
+            <td>阅读&观看时间</td>
             <td>下载量</td>
             <td>操作</td>
 
@@ -24,12 +26,14 @@
             echo '<tr>';
             echo '<td>' . $file->id . '</td>';
             echo '<td>' . $file->name . '</td>';
-            echo '<td>' . $file->read_count . '</td>';
-            echo '<td>' . $file->download . '</td>';
+            echo '<td>' . $file->type . '</td>';
+            echo '<td>' . $file->read_count . '次</td>';
+            echo '<td>' . $file->read_time . '秒</td>';
+            echo '<td>' . $file->download . '秒</td>';
             echo '<td style="width: 180px">';
             if ($file->type == 'video') {
                 echo '
-                    <button class="btn btn-success btn-control pull-left" data-url="/video?id=' . $file->id . '"><a href="/video?id=' . $file->id . '">在线观看</a></button>';
+                    <button class="btn btn-success btn-control pull-left" data-url="/video?id=' . $file->id . '"><a href="/video?id=' . $file->id . '" target="_black">在线观看</a></button>';
             } else {
                 echo '
                     <button class="btn btn-success btn-control pull-left" data-url="/read?id=' . $file->id . '"><a href="' . $file->src . '">阅读</a></button>';

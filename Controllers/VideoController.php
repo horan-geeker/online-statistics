@@ -10,11 +10,13 @@ namespace Controllers;
 use Models\File;
 use Views\View;
 
-class VideoController{
+class VideoController extends Controller
+{
 
-    public function __construct()
+    public function index()
     {
         $video = File::find($_GET['id']);
-        View::view('video',['video'=>$video]);
+        $video->inc('read_count');
+        View::view('video', ['video' => $video]);
     }
 }

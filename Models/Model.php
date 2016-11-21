@@ -46,7 +46,7 @@ class Model
         while ($record = $query->fetchObject(get_called_class())) {
             $collection[] = $record;
         }
-        if(count($collection)==1){
+        if (count($collection) == 1) {
             return $collection[0];
         }
         return $collection;
@@ -55,7 +55,7 @@ class Model
     public function update($sql)
     {
         $query = $this->pdo->prepare($sql);
-        $query->execute();
+        return $query->execute();
     }
 
     public static function all()
@@ -70,11 +70,11 @@ class Model
         return $instance->query('select * from ' . $instance->table . ' where id=' . $id);
     }
 
-    public function inc($column)
+    public function inc($column, $num = 1)
     {
         $count = $this->$column;
-        $count++;
-        $sql = 'update '.$this->table." set $column=$count where id=".$this->id;
+        $count = $count+$num;
+        $sql = 'update ' . $this->table . " set $column=$count where id=" . $this->id;
         return $this->update($sql);
     }
 
