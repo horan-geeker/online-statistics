@@ -9,4 +9,8 @@ namespace Controllers;
 
 class ReadController{
 
+    public function __construct()
+    {
+
+    }
 }

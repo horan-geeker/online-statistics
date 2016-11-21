@@ -11,6 +11,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL&~E_NOTICE);
 
 define('DIR',dirname(__DIR__));
+define('PUBLIC_DIR',__DIR__);
 define('CONTROLLER_DIR',DIR.'/Controller');
 define('MODEL_DIR',DIR.'/Models');
 define('VIEW_DIR',DIR.'/Views');
@@ -26,6 +27,10 @@ if(strpos($_SERVER['REQUEST_URI'],'download') !== false){
 
 if(strpos($_SERVER['REQUEST_URI'],'read') !== false){
     return new \Controllers\ReadController();
+}
+
+if(strpos($_SERVER['REQUEST_URI'],'video') !== false){
+    return new \Controllers\VideoController();
 }
 
 return new \Controllers\IndexController();

@@ -7,11 +7,13 @@
  */
 namespace Controllers;
 
+use Models\File;
+
 class IndexController{
 
     public function __construct()
     {
-        $files = \Models\File::all();
-        return \Views\View::view('show',$files);
+        $files = File::all();
+        return \Views\View::view('show',['files'=>$files]);
     }
 }

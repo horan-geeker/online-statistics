@@ -1,8 +1,8 @@
-a {
-    color: #ffffff;
-}
-
-a:hover{
+a,a:hover,a:focus{
     color: #ffffff;
     text-decoration: none;
+}
+
+body{
+    padding: 0;
 }

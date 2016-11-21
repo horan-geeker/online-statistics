@@ -7,6 +7,6 @@
  */
 namespace Models;
 
-class File extends Database {
+class File extends Model {
 
 }
