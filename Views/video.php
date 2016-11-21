@@ -11,15 +11,14 @@
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-5">
-        <h1 class="page-title">观看视频:<span class="text-muted"><?php echo $video->name ?></span>
+        <h1 class="page-header">观看视频:<span class="text-muted"><?php echo $video->name ?></span>
             <a class="btn btn-primary" href="/">返回</a>
         </h1>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
     <div class="col-md-4">
-        <h3><span class="text-center">观看时间: <b id="time">0</b></span></h3>
+        <h3><span class="text-center">观看时间: <b id="time">0</b>秒</span></h3>
     </div>
-    <div class="col-md-1"></div>
 </div>
 <div class="container">
     <div class="row">

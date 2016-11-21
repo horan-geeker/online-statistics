@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="text-muted">在线统计</h1>
+    <h1 class="text-muted page-header">在线统计</h1>
     <table class="table table-bordered table-striped table-hover text-center">
         <tr>
             <td>#</td>
