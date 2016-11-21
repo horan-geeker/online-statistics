@@ -11,10 +11,9 @@ use Models\File;
 
 class IndexController
 {
-
     public function index()
     {
         $files = File::all();
-        return \Views\View::view('show', ['files' => $files]);
+        return \Views\View::view('index', ['files' => $files]);
     }
 }

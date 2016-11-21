@@ -42,14 +42,14 @@
     function changeStatus() {
         if(video.paused){
             video.play();
-            timer = setInterval(getTime,1000);
+            timer = setInterval(setTime,1000);
         }else{
             video.pause();
             clearInterval(timer);
         }
     }
 
-    function getTime() {
+    function setTime() {
         time.text(parseInt(time.text())+1);
     }
 
