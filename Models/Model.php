@@ -12,24 +12,20 @@ use bootstrap\ConnectionFactory;
 class Model
 {
 
-    private $model;
+    private $connection;
 
     private $table;
 
     public function __construct()
     {
-        $this->model = ConnectionFactory::connection();
+        $this->connection = ConnectionFactory::connection();
 
         $this->table = strtolower(explode('\\', get_called_class())[1] . 's');
     }
 
     public function query($sql)
     {
-        $this->model->prepareQuery($sql);
-        $collection = [];
-        while ($record = $this->model->get(get_called_class())) {
-            $collection[] = $record;
-        }
+        $collection = $this->connection->get($sql,get_called_class());
         if (count($collection) == 1) {
             return $collection[0];
         }
@@ -38,7 +34,7 @@ class Model
 
     public function update($sql)
     {
-        return $this->model->prepareQuery($sql);
+        return $this->connection->query($sql);
     }
 
     public static function all()
@@ -56,7 +52,7 @@ class Model
     public function inc($column, $num = 1)
     {
         $count = $this->$column;
-        $count = $count+$num;
+        $count = $count + $num;
         $sql = 'update ' . $this->table . " set $column=$count where id=" . $this->id;
         return $this->update($sql);
     }

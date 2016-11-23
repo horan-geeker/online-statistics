@@ -29,15 +29,21 @@ class MySqlConnector implements Connection
         return $this->pdo->exec($query);
     }
 
-    public function prepareQuery($sql)
+    public function query($sql)
     {
         $this->query = $this->pdo->prepare($sql);
         return $this->query->execute();
     }
 
-    public function get($class)
+    public function get($sql,$class)
     {
-        return $this->query->fetchObject($class);
+        $collection = [];
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        while ($record = $query->fetchObject($class)) {
+            $collection[] = $record;
+        }
+        return $collection;
     }
 
 }

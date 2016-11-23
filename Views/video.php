@@ -12,7 +12,7 @@
     <div class="col-md-1"></div>
     <div class="col-md-5">
         <h1 class="page-header">观看视频:<span class="text-muted"><?php echo $video->name ?></span>
-            <a class="btn btn-primary" href="/">返回</a>
+            <a class="btn btn-primary" href="/">结束观看并返回</a>
         </h1>
     </div>
     <div class="col-md-2"></div>
@@ -23,7 +23,7 @@
 <div class="container">
     <div class="row">
         <div align="center" class="col-md-10">
-            <video poster="/img/video-poster.png" onclick="changeStatus()" id="player" loop controls preload="metadata">
+            <video poster="/img/video-poster.png" onclick="changeStatus()" id="player" controls preload="metadata">
                 <source src="<?php echo $video->src ?>" type="video/mp4">
             </video>
         </div>
@@ -50,7 +50,11 @@
     }
 
     function setTime() {
-        time.text(parseInt(time.text())+1);
+        if(video.ended){
+            clearInterval(timer);
+        }else{
+            time.text(parseInt(time.text())+1);
+        }
     }
 
     window.onbeforeunload = function(){
