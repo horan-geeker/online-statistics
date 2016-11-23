@@ -12,8 +12,9 @@ class MySqlConnector implements Connection
 
     private $pdo;
     private $query;
+    private static $model = null;
 
-    public function __construct(array $config)
+    private function __construct(array $config)
     {
         $dsn = $config['DB_CONNECTION'] . ":host=" . $config['DB_HOST'] . ";dbname=" . $config['DB_DATABASE'];
 
@@ -22,6 +23,14 @@ class MySqlConnector implements Connection
         $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         $this->pdo = $pdo;
+    }
+
+    public static function getInstance($config)
+    {
+        if (!self::$model) {
+            self::$model = new MySqlConnector($config);
+        }
+        return self::$model;
     }
 
     public function exec($query)
@@ -35,7 +44,7 @@ class MySqlConnector implements Connection
         return $this->query->execute();
     }
 
-    public function get($sql,$class)
+    public function get($sql, $class)
     {
         $collection = [];
         $query = $this->pdo->prepare($sql);

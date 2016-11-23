@@ -16,6 +16,7 @@ class DownloadController extends Controller
     {
         $file = File::find($_GET['id']);
         $file->inc('download');
+
         $downloadFile = PUBLIC_DIR . $file->src;
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
@@ -25,7 +26,6 @@ class DownloadController extends Controller
         header('Pragma: public');
         header('Content-Length: ' . filesize($downloadFile));
         readfile($downloadFile);
-        $this->redirect('/');
-        exit;
+
     }
 }

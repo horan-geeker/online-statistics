@@ -18,7 +18,7 @@ class ConnectionFactory
 
     public static function connection()
     {
-        $config = require DIR."/config/database.php";
+        $config = require DIR . "/config/database.php";
 
         $instance = new static($config);
 
@@ -28,9 +28,9 @@ class ConnectionFactory
 
         switch ($instance->config['DB_CONNECTION']) {
             case 'mysql':
-                return new MySqlConnector($config);
+                return MySqlConnector::getInstance($config);
             case 'pgsql':
-                return new PostgresConnector($config);
+                return PostgresConnector::getInstance($config);
             default:
                 return new \Exception("database not define");
         }
