@@ -7,43 +7,27 @@
  */
 namespace Models;
 
+use bootstrap\ConnectionFactory;
+
 class Model
 {
 
-    private $pdo;
+    private $model;
 
     private $table;
 
     public function __construct()
     {
-        $config = [
-            'DB_CONNECTION' => 'mysql',
-            'DB_HOST'       => '127.0.0.1',
-            'DB_PORT'       => '3306',
-            'DB_DATABASE'   => 'statistics',
-            'DB_USERNAME'   => 'root',
-            'DB_PASSWORD'   => 'root',
-        ];
-
-        $dsn = $config['DB_CONNECTION'] . ":host=" . $config['DB_HOST'] . ";dbname=" . $config['DB_DATABASE'];
-
-        $pdo = new \PDO($dsn, $config['DB_USERNAME'], $config['DB_PASSWORD']);
-
-        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
-        $pdo->exec('set names utf8');
-
-        $this->pdo = $pdo;
+        $this->model = ConnectionFactory::connection();
 
         $this->table = strtolower(explode('\\', get_called_class())[1] . 's');
     }
 
     public function query($sql)
     {
-        $query = $this->pdo->prepare($sql);
-        $query->execute();
+        $this->model->prepareQuery($sql);
         $collection = [];
-        while ($record = $query->fetchObject(get_called_class())) {
+        while ($record = $this->model->get(get_called_class())) {
             $collection[] = $record;
         }
         if (count($collection) == 1) {
@@ -54,8 +38,7 @@ class Model
 
     public function update($sql)
     {
-        $query = $this->pdo->prepare($sql);
-        return $query->execute();
+        return $this->model->prepareQuery($sql);
     }
 
     public static function all()

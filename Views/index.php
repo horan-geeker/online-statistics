@@ -29,7 +29,7 @@
             echo '<td>' . $file->type . '</td>';
             echo '<td>' . $file->read_count . '次</td>';
             echo '<td>' . $file->read_time . '秒</td>';
-            echo '<td>' . $file->download . '秒</td>';
+            echo '<td>' . $file->download . '次</td>';
             echo '<td style="width: 180px">';
             if ($file->type == 'video') {
                 echo '
