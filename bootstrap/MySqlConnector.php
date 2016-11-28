@@ -11,7 +11,6 @@ class MySqlConnector implements Connection
 {
 
     private $pdo;
-    private $query;
     private static $model = null;
 
     private function __construct(array $config)
@@ -27,7 +26,7 @@ class MySqlConnector implements Connection
 
     public static function getInstance($config)
     {
-        if (!self::$model) {
+        if (empty(self::$model)) {
             self::$model = new MySqlConnector($config);
         }
         return self::$model;
@@ -38,21 +37,28 @@ class MySqlConnector implements Connection
         return $this->pdo->exec($query);
     }
 
-    public function query($sql)
+    public function query($sql, array $bindParameters = [])
     {
-        $this->query = $this->pdo->prepare($sql);
-        return $this->query->execute();
+        $statement = $this->pdo->prepare($sql);
+        if($statement->execute($bindParameters) !== false){
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    public function get($sql, $class)
+    public function get($sql, array $bindParameters = [], $class)
     {
         $collection = [];
-        $query = $this->pdo->prepare($sql);
-        $query->execute();
-        while ($record = $query->fetchObject($class)) {
-            $collection[] = $record;
+        $statement = $this->pdo->prepare($sql);
+        if ($statement->execute($bindParameters) !== false) {
+            while ($record = $statement->fetchObject($class)) {
+                $collection[] = $record;
+            }
+            return $collection;
+        } else {
+            throw new \Exception("Database query error");
         }
-        return $collection;
     }
 
 }

@@ -10,6 +10,8 @@ namespace bootstrap;
 interface Connection
 {
     public function exec($query);
-    public function query($sql);
-    public function get($sql,$class);
+
+    public function query($sql,array $bindParameters);
+
+    public function get($sql, array $bindParameters, $class);
 }
