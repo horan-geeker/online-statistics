@@ -9,7 +9,7 @@ namespace Controllers;
 
 use Models\File;
 
-class IndexController
+class IndexController extends Controller
 {
     public function index()
     {
